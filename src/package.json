@@ -1,0 +1,23 @@
+{
+  "name": "fetch-results",
+  "version": "0.1.0",
+  "description": "Make HTTP requests without catch",
+  "main": "index.js",
+  "module": "./esm/index.js",
+  "types": "index.d.ts",
+  "keywords": [
+    "Typescript",
+    "Error Handling",
+    "fetch"
+  ],
+  "author": "ogrman",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ogrman/fetch-results"
+  },
+  "readme": "README.md",
+  "dependencies": {
+    "ts-results": "^3.3.0"
+  }
+}
