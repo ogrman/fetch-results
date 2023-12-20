@@ -46,6 +46,20 @@ describe("fetchResult", () => {
     }
   });
 
+  it("should give a ParseError when parsing FormData fails", async () => {
+    const result = await fetchResult("http://localhost:9999/invalid_formdata");
+    expect(server.lastAction).to.equal("get_invalid_formdata");
+    if (!result.ok) {
+      fail("Expected a response");
+    } else {
+      const json = await result.val.formData();
+      json.mapErr(err => {
+        expect(err.parseError).to.equal("AbortError: Error: Multipart: Boundary not found");
+      });
+      expect(json.err).to.be.true;
+    }
+  });
+
   it("should give the result back when parsing json succeeds", async () => {
     const result = await fetchResult("http://localhost:9999/json");
     expect(server.lastAction).to.equal("get_json");

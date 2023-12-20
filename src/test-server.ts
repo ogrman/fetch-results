@@ -5,6 +5,7 @@ export type LastAction =
   | "get_text"
   | "get_invalid_json"
   | "get_json"
+  | "get_invalid_formdata"
   ;
 
 type Server = http.Server<
@@ -37,7 +38,12 @@ export class TestServer {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.write("\"a string can be json\"");
         res.end();
-     } else {
+      } else if (req.method === "GET" && req.url === "/invalid_formdata") {
+        this.lastAction = "get_invalid_formdata";
+        res.writeHead(200, { "Content-Type": "multipart/form-data" });
+        res.write("bad formdata");
+        res.end();
+      } else {
         res.writeHead(200, { "Content-Type": "text/plain" });
         res.write("default response");
         res.end();

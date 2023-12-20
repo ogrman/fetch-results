@@ -1,11 +1,11 @@
 {
-  "name": "second-guess",
-  "version": "0.4.1",
-  "description": "A parser for already parsed JSON",
+  "name": "fetch-results",
+  "version": "0.1.1",
+  "description": "Make HTTP requests without catch",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/larohr/second-guess.git"
+    "url": "https://github.com/larohr/fetch-results.git"
   },
   "scripts": {
     "build": "npm run clean && npm run build:ts && npm run build:copy",

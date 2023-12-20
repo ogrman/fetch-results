@@ -51,7 +51,7 @@ export class ResultResponse {
     try {
       return new Ok(await this.response.formData());
     } catch (error: any) {
-      return new Err({ parseError: error.cause.toString() });
+      return new Err({ parseError: error.toString() });
     }
   }
 

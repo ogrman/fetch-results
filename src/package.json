@@ -1,6 +1,6 @@
 {
   "name": "fetch-results",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Make HTTP requests without catch",
   "main": "index.js",
   "module": "./esm/index.js",
