@@ -1,7 +1,7 @@
 import * as chai from 'chai';
 import { TestServer } from './test-server';
 import { Err, Ok, Result } from 'ts-results';
-import { fetchResult } from ".";
+import { fetchr } from ".";
 
 const expect = chai.expect;
 
@@ -13,7 +13,7 @@ describe("fetchResult", () => {
   });
 
   it("should return the expected connection error", async () => {
-    const result = await fetchResult("http://localhost:9999/refuse");
+    const result = await fetchr("http://localhost:9999/refuse");
     expect(server.lastAction).to.equal("refused");
     result.mapErr(err => {
       expect(err.connectionError).to.equal("SocketError: other side closed");
@@ -22,7 +22,7 @@ describe("fetchResult", () => {
   });
 
   it("should return the expected response", async () => {
-    const result = await fetchResult("http://localhost:9999/text");
+    const result = await fetchr("http://localhost:9999/text");
     expect(server.lastAction).to.equal("get_text");
     if (!result.ok) {
       fail("Expected a response");
@@ -33,7 +33,7 @@ describe("fetchResult", () => {
   });
 
   it("should give a ParseError when parsing json fails", async () => {
-    const result = await fetchResult("http://localhost:9999/invalid_json");
+    const result = await fetchr("http://localhost:9999/invalid_json");
     expect(server.lastAction).to.equal("get_invalid_json");
     if (!result.ok) {
       fail("Expected a response");
@@ -47,7 +47,7 @@ describe("fetchResult", () => {
   });
 
   it("should give a ParseError when parsing FormData fails", async () => {
-    const result = await fetchResult("http://localhost:9999/invalid_formdata");
+    const result = await fetchr("http://localhost:9999/invalid_formdata");
     expect(server.lastAction).to.equal("get_invalid_formdata");
     if (!result.ok) {
       fail("Expected a response");
@@ -61,7 +61,7 @@ describe("fetchResult", () => {
   });
 
   it("should give the result back when parsing json succeeds", async () => {
-    const result = await fetchResult("http://localhost:9999/json");
+    const result = await fetchr("http://localhost:9999/json");
     expect(server.lastAction).to.equal("get_json");
     if (!result.ok) {
       fail("Expected a response");

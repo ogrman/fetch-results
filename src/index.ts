@@ -2,13 +2,13 @@
 
 import { Ok, Err, Result } from 'ts-results';
 
-export async function fetchResult(
+export async function fetchr(
   input: RequestInfo | URL,
   init?: RequestInit,
-): Promise<Result<ResultResponse, ConnectionError>> {
+): Promise<Result<ResponseR, ConnectionError>> {
   try {
     const response = await fetch(input, init);
-    return new Ok(new ResultResponse(response));
+    return new Ok(new ResponseR(response));
   } catch (error: any) {
     return new Err({ connectionError: error.cause.toString() });
   }
@@ -18,7 +18,7 @@ export type ConnectionError = { connectionError: string };
 
 export type ParseError = { parseError: string };
 
-export class ResultResponse {
+export class ResponseR {
   readonly type: ResponseType;
   readonly url: string;
   readonly status: number; 
@@ -43,8 +43,8 @@ export class ResultResponse {
     return this.response.blob();
   }
 
-  clone(): ResultResponse {
-    return new ResultResponse(this.response.clone());
+  clone(): ResponseR {
+    return new ResponseR(this.response.clone());
   }
 
   async formData(): Promise<Result<FormData, ParseError>> {
